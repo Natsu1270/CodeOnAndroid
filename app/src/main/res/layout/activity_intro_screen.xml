@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.IntroScreen">
+
+    <ImageView
+        android:id="@+id/bgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/codage" />
+
+    <ImageView
+
+        android:layout_toLeftOf="@+id/arrow_end"
+        android:id="@+id/arrow_left"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/leftarrow" />
+
+    <ImageView
+        android:layout_toRightOf="@+id/arrow_end"
+        android:id="@+id/arrow_right"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/rightarrow" />
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/arrow_end"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/endarrow" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.1"
+        android:text="C.O.A"
+        android:textColor="@color/colorAccent"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:onClick="buttonClick"
+        android:alpha="0"
+        android:id="@+id/btn_register"
+        android:background="@drawable/border_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/arrow_left"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Get started"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#ffff"/>
+
+    <Button
+        android:onClick="buttonClick"
+        android:background="@drawable/border_button"
+        android:textColor="#ffff"
+        android:alpha="0"
+        android:textStyle="bold"
+        android:id="@+id/btn_login"
+        android:textSize="18sp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/btn_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Login" />
+
+
+</RelativeLayout>

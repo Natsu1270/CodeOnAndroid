@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Login"
+    android:background="@drawable/codage"
+
+
+    >
+    <TextView
+
+        android:id="@+id/log_nav"
+        android:text="Login"
+        android:textColor="#ffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#6F000205"
+        />
+    <TextView
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@+id/log_nav"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtV_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Username"
+        android:textColor="#ffff"
+        />
+    <EditText
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/txt_user"
+        android:layout_below="@+id/txtV_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#ffff"
+        android:textColor="#ffff"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/txt_user"
+        android:id="@+id/txtV_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Password"
+        android:textColor="#ffff"
+        />
+
+    <EditText
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@+id/txtV_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_pass"
+        android:textColor="#ffff"
+        android:inputType="textPassword"
+        android:backgroundTint="#ffff"
+        />
+    <Button
+
+        android:id="@+id/log_in"
+        android:text="Login"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/txt_pass"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#02BCD4"
+        android:textColor="#ffff"
+        android:onClick="login_btn_click"
+        />
+    <TextView
+        android:id="@+id/orwith"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/log_in"
+        android:text="OR LOG IN WITH"
+        android:textColor="#ffff"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        />
+
+    <Button
+        android:onClick="gmail_login"
+        android:layout_marginTop="30dp"
+        android:background="#ffff"
+        android:paddingLeft="20dp"
+        android:id="@+id/sign_gmail"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/orwith"
+        android:layout_marginHorizontal="20dp"
+        android:drawableLeft="@drawable/google"
+        android:text="Log in with google account"
+        />
+    <!--<Button-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="#ffff"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:id="@+id/sign_facebook"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:layout_below="@+id/sign_gmail"-->
+        <!--android:layout_marginHorizontal="20dp"-->
+        <!--android:drawableLeft="@drawable/facebook"-->
+        <!--android:text="Log in with facebook account"-->
+        <!--/>-->
+
+
+</RelativeLayout>

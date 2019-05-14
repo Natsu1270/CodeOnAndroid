@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.codeonandroid.R;
@@ -34,6 +35,7 @@ public class Register extends AppCompatActivity {
     private EditText txt_name;
     private Button reg_btn;
     private Button gmail_log_btn;
+    private ImageButton back_btn;
 
     private String rusername;
     private String rpassword;
@@ -73,6 +75,8 @@ public class Register extends AppCompatActivity {
         txt_rusername = findViewById(R.id.reguser);
         txt_rpassword = findViewById(R.id.regpass);
         gmail_log_btn = findViewById(R.id.reg_gmail);
+        back_btn = findViewById(R.id.btn_back2);
+
         mAuth = FirebaseAuth.getInstance();
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -82,6 +86,9 @@ public class Register extends AppCompatActivity {
         mGoogleSingInClient = GoogleSignIn.getClient(this,gso);
     }
 
+    public void back_click(View view){
+        finish();
+    }
     private void createUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override

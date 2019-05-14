@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
     private EditText log_password;
     private Button log_btn;
     private Button gmail_log_btn;
+    private ImageButton btn_back;
     private FirebaseAuth mAuth;
 
     private String username;
@@ -75,7 +77,7 @@ public class Login extends AppCompatActivity {
         log_btn = findViewById(R.id.log_in);
         gmail_log_btn = findViewById(R.id.sign_gmail);
         mAuth = FirebaseAuth.getInstance();
-
+        btn_back = findViewById(R.id.btn_back);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -84,6 +86,9 @@ public class Login extends AppCompatActivity {
         mGoogleSingInClient = GoogleSignIn.getClient(this,gso);
     }
 
+    public void back_click(View view){
+        finish();
+    }
     private void logIn(String email,String password){
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

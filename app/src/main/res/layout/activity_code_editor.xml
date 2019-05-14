@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CodeEditor">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtV_input"
+        android:text="Input"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        />
+    <EditText
+
+        android:layout_below="@+id/txtV_input"
+        android:id="@+id/txt_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="runCode"
+        android:id="@+id/run_code_btn"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:text="RUN"
+        android:textSize="20sp"
+        android:layout_below="@+id/txt_code"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/txt_output"
+        android:layout_below="@+id/run_code_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

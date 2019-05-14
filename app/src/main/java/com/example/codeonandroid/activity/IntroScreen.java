@@ -24,9 +24,9 @@ public class IntroScreen extends AppCompatActivity {
     private ImageView arrow_left;
     private ImageView arrow_right;
     private ImageView arrow_end;
-    private TextView  app_name;
     private Button  btn_register;
     private Button btn_login;
+    private TextView skip;
 
     Display display;
     Point size;
@@ -55,9 +55,9 @@ public class IntroScreen extends AppCompatActivity {
         arrow_left = findViewById(R.id.arrow_left);
         arrow_right = findViewById(R.id.arrow_right);
         arrow_end = findViewById(R.id.arrow_end);
-        app_name = findViewById(R.id.app_name);
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
+        skip = findViewById(R.id.skip);
 
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
@@ -77,13 +77,13 @@ public class IntroScreen extends AppCompatActivity {
     public void button_animate(){
         btn_login.animate().alpha(1).setDuration(duration);
         btn_register.animate().alpha(1).setDuration(duration);
+        skip.animate().alpha(1).setDuration(duration);
     }
     public void splashScreenAni(){
 
         arrow_left.animate().translationX(90f).setDuration(duration);
         arrow_right.animate().translationX(-90f).setDuration(duration);
         arrow_end.setAnimation(anim);
-        app_name.animate().alpha(1).scaleX(2f).scaleY(2f).translationY(200f).setDuration(duration);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -104,6 +104,10 @@ public class IntroScreen extends AppCompatActivity {
         button_animate();
     }
 
+    public void skip_click(View view){
+        Intent main_intent = new Intent(IntroScreen.this,MainActivity.class);
+        startActivity(main_intent);
+    }
     public void buttonClick(View view){
         Intent login_intent = new Intent(this,Login.class);
         Intent register_intent = new Intent( this,Register.class);
@@ -113,4 +117,5 @@ public class IntroScreen extends AppCompatActivity {
             startActivity(register_intent);
         }
     }
+
 }

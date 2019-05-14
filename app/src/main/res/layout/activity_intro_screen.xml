@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/codage" />
+        app:srcCompat="@drawable/darkbg" />
 
     <ImageView
 
@@ -37,18 +37,19 @@
         android:layout_height="120dp"
         app:srcCompat="@drawable/endarrow" />
 
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:alpha="0.1"
-        android:text="C.O.A"
-        android:textColor="@color/colorAccent"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:id="@+id/app_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:alpha="0.1"-->
+        <!--android:text="C.O.A"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="26sp"-->
+        <!--android:textStyle="bold" />-->
 
     <Button
+        android:textAllCaps="false"
         android:onClick="buttonClick"
         android:alpha="0"
         android:id="@+id/btn_register"
@@ -64,6 +65,7 @@
         android:textColor="#ffff"/>
 
     <Button
+        android:textAllCaps="false"
         android:onClick="buttonClick"
         android:background="@drawable/border_button"
         android:textColor="#ffff"
@@ -77,6 +79,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Login" />
+    <TextView
+        android:clickable="true"
+        android:onClick="skip_click"
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:text="SKIP"
+        android:textColor="#ffff"
+        android:textSize="15sp"
+        android:alpha="0"
+        android:layout_marginTop="15dp"
+        />
 
 
 </RelativeLayout>

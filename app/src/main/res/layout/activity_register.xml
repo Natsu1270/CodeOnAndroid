@@ -20,7 +20,18 @@
         android:layout_height="50dp"
         android:background="#6F000205"
         />
-
+    <ImageButton
+        android:onClick="back_click"
+        android:id="@+id/btn_back2"
+        android:layout_marginHorizontal="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/backarrow"
+        android:background="@android:color/transparent"
+        />
     <TextView
         android:id="@+id/txtV_name"
         android:layout_marginHorizontal="20dp"
@@ -86,7 +97,7 @@
         android:backgroundTint="#ffff"
         />
     <Button
-
+        android:textAllCaps="false"
         android:id="@+id/reg_btn"
         android:text="Register"
         android:textSize="15sp"

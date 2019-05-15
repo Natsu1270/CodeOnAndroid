@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/spinner"
+        android:title="spinner"
+        android:icon="@drawable/spinner_ic"
+        app:actionViewClass="android.widget.Spinner"
+        android:background="#ff00"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/run_code"
+        android:icon="@drawable/ic_action_run"
+        android:title="Run"
+        app:showAsAction="always" />
     <item
         android:id="@+id/read_only"
         android:title="Read only mode" />
+
     <item android:id="@+id/new_code" android:title="New"/>
     <item android:id="@+id/save_as" android:title="Save as"/>
     <item android:id="@+id/delete_file" android:title="Delete file"/>

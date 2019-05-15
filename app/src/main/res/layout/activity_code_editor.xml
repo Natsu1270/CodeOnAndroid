@@ -4,48 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/code_editor_layout"
     tools:context=".activity.CodeEditor">
     <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"
-        ></include>
-
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:ignore="Overdraw"
-        android:id="@+id/scroll_view"
+        android:id="@+id/toolbar"/>
+    <EditText
+        android:background="#28285A"
+        android:layout_below="@id/toolbar"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="#ffff"
+        android:id="@+id/txt_code"
+        android:gravity="top"
+        android:padding="10dp"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="#3A3535"
-        android:layout_below="@+id/toolbar">
-        <EditText
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:textColor="#ffff"
-            android:id="@+id/txt_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableTint="@android:color/transparent"
-            android:backgroundTint="@android:color/transparent"
-            />
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:backgroundTint="@android:color/transparent"
 
-
-    <Button
-        android:onClick="runCode"
-        android:id="@+id/run_code_btn"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:text="RUN"
-        android:textSize="20sp"
-        android:layout_below="@+id/scroll_view"
-        android:layout_centerHorizontal="true"
         />
-    <TextView
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/txt_output"
-        android:layout_below="@+id/run_code_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </RelativeLayout>

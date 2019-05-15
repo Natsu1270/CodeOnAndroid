@@ -7,5 +7,47 @@
     android:elevation="5dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <LinearLayout
+        android:id="@+id/btn_group_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        >
 
+        <ImageButton
+            android:onClick="back"
+            android:id="@+id/back"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/backarrow"
+            android:background="@null"
+            />
+        <ImageButton
+            android:onClick="hide_keyboard"
+            android:id="@+id/hide_key"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/hide_key_ic"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clear_code_ic"
+            android:id="@+id/clear_code"
+            android:onClick="clear_code"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            />
+        <Spinner
+            android:id="@+id/spinner_lang"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
+    </LinearLayout>
 </android.support.v7.widget.Toolbar>

@@ -3,4 +3,21 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="secondary_text">#8a000000</color>
+    <color name="disabled_text">#8affffff</color>
+    <color name="drawer_text">#fff</color>
+    <color name="drawer_text_unselected">#8affffff</color>
+    <color name="background_drawer">#8000</color>
+    <color name="background_editor">#8000</color>
+    <color name="background_item_pressed">#8222</color>
+    <color name="background_progress">#8000</color>
+    <color name="editor_text">#fff</color>
+    <color name="syntax_error">#8800</color>
+    <color name="syntax_number">#7ba212</color>
+    <color name="syntax_keyword">#399ed7</color>
+    <color name="syntax_builtin">#d79e39</color>
+    <color name="syntax_comment">#808080</color>
+    <color name="crop_bound">#8fff</color>
+    <color name="cube_face_selected">#ffff</color>
+    <color name="cube_face_text">#fff</color>
 </resources>

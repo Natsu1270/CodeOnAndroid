@@ -1,6 +1,7 @@
 package com.example.codeonandroid.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -69,7 +70,10 @@ public class AppMain extends AppCompatActivity
             bmImage.setImageBitmap(result);
         }
     }
-
+    public void code_now(View view){
+        Intent code_intent = new Intent(AppMain.this,CodeEditor.class);
+        startActivity(code_intent);
+    }
     public void initData(){
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();

@@ -1,0 +1,25 @@
+<!-- Use a ScrollView around EditText to have a padding around the text
+	contents. If we make EditText scrollable, contents will be cut off
+	at the specified padding but before the visible border. -->
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="Overdraw"
+	android:id="@+id/scroll_view"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background_editor">
+	<com.example.codeonandroid.widget.ShaderEditor
+		android:id="@+id/editor"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="8dp"
+		android:gravity="start|top"
+		android:typeface="monospace"
+		android:textSize="12sp"
+		android:textColor="@color/editor_text"
+		android:ellipsize="end"
+		android:imeOptions="flagNoExtractUi"
+		android:inputType="textMultiLine|textNoSuggestions"
+		android:background="@android:color/transparent"/>
+</ScrollView>

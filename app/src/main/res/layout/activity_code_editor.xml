@@ -5,20 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.CodeEditor">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtV_input"
-        android:text="Input"
-        android:textSize="25sp"
-        android:layout_centerHorizontal="true"
-        />
-    <EditText
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        ></include>
 
-        android:layout_below="@+id/txtV_input"
-        android:id="@+id/txt_code"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:ignore="Overdraw"
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="500dp"
+        android:background="#3A3535"
+        android:layout_below="@+id/toolbar">
+        <EditText
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textColor="#ffff"
+            android:id="@+id/txt_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTint="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            />
+    </ScrollView>
+
 
     <Button
         android:onClick="runCode"
@@ -27,7 +37,7 @@
         android:layout_height="70dp"
         android:text="RUN"
         android:textSize="20sp"
-        android:layout_below="@+id/txt_code"
+        android:layout_below="@+id/scroll_view"
         android:layout_centerHorizontal="true"
         />
     <TextView

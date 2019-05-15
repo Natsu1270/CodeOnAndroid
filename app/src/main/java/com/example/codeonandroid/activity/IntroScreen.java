@@ -34,8 +34,8 @@ public class IntroScreen extends AppCompatActivity {
     private int device_height;
     Animation anim;
 
-    private static int duration = 1000;
-    private static int btn_timeout = 1000;
+    private static int duration = 2000;
+    private static int btn_timeout = 2000;
 
     private FirebaseAuth mAuth;
 
@@ -83,7 +83,7 @@ public class IntroScreen extends AppCompatActivity {
 
         arrow_left.animate().translationX(90f).setDuration(duration);
         arrow_right.animate().translationX(-90f).setDuration(duration);
-        arrow_end.setAnimation(anim);
+//        arrow_end.setAnimation(anim);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -91,7 +91,7 @@ public class IntroScreen extends AppCompatActivity {
                 if(mAuth.getCurrentUser() == null) {
                     button_animate();
                 }else{
-                    Intent main_intent = new Intent(IntroScreen.this,MainActivity.class);
+                    Intent main_intent = new Intent(IntroScreen.this,AppMain.class);
                     startActivity(main_intent);
                 }
             }
@@ -105,7 +105,7 @@ public class IntroScreen extends AppCompatActivity {
     }
 
     public void skip_click(View view){
-        Intent main_intent = new Intent(IntroScreen.this,MainActivity.class);
+        Intent main_intent = new Intent(IntroScreen.this,AppMain.class);
         startActivity(main_intent);
     }
     public void buttonClick(View view){

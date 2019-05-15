@@ -97,9 +97,6 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this,"Create new user successfully!",Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     createUserProfile(user);
-                    Intent main_intent = new Intent(Register.this,MainActivity.class);
-                    startActivity(main_intent);
-
                 }else{
                     Toast.makeText(Register.this,"Register error: "+task.getException().toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -115,6 +112,16 @@ public class Register extends AppCompatActivity {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name)
                 .build();
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Intent main_intent = new Intent(Register.this,AppMain.class);
+                            startActivity(main_intent);
+                        }
+                    }
+                });
     }
 
     public void register_btnClick(View view){
@@ -144,7 +151,7 @@ public class Register extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent main_intent = new Intent(Register.this,MainActivity.class);
+                            Intent main_intent = new Intent(Register.this,AppMain.class);
                             startActivity(main_intent);
                         } else {
                             // If sign in fails, display a message to the user.

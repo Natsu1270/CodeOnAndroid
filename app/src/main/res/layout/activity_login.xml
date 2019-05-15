@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
     >
     <TextView
         android:id="@+id/log_nav"
-        android:text="Login"
+        android:text="@string/menu_login"
         android:textColor="#ffff"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -40,16 +39,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="Username"
+        android:text="@string/email"
         android:textColor="#ffff"
         />
     <EditText
+        android:autofillHints="@string/email"
         android:layout_marginHorizontal="20dp"
         android:id="@+id/txt_user"
         android:layout_below="@+id/txtV_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#ffff"
+        android:inputType="textEmailAddress"
         android:textColor="#ffff"
         android:layout_centerHorizontal="true"
         />

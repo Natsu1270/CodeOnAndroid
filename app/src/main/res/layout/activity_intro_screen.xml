@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/darkbg" />
+        app:srcCompat="@drawable/appbg" />
 
     <ImageView
 
@@ -32,6 +32,7 @@
 
     <ImageView
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:id="@+id/arrow_end"
         android:layout_width="120dp"
         android:layout_height="120dp"

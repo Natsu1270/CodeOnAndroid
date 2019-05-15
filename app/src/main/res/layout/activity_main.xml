@@ -19,16 +19,17 @@ tools:context=".activity.MainActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         />
 
 </RelativeLayout>
     <android.support.design.widget.NavigationView
+        app:headerLayout="@layout/nav_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_bg"
-        app:itemTextColor="#ffff"
+        android:background="#ffff"
+        app:itemTextColor="#0C0C0C"
         app:menu="@menu/nav_drawer_menu"
+        android:layout_gravity="start"
         >
 
     </android.support.design.widget.NavigationView>

@@ -96,6 +96,9 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Intent main_intent = new Intent(Login.this,AppMain.class);
+                            startActivity(main_intent);
+
                         }else{
                             Toast.makeText(Login.this,"Login failed "+task.getException().toString(),Toast.LENGTH_SHORT).show();
                         }
@@ -128,7 +131,7 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent main_intent = new Intent(Login.this,MainActivity.class);
+                            Intent main_intent = new Intent(Login.this,AppMain.class);
                             startActivity(main_intent);
                         } else {
                             // If sign in fails, display a message to the user.

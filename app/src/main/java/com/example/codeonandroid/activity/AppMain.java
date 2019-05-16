@@ -127,6 +127,7 @@ public class AppMain extends AppCompatActivity
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
                         final ArrayList<String> list = (ArrayList<String>) document.get("codes");
+
                         codes_save.setText(Integer.toString(list.size()));
                         list_code_view.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -166,7 +167,7 @@ public class AppMain extends AppCompatActivity
         profile_avatar = findViewById(R.id.profile_avatar);
         profile_name = findViewById(R.id.profile_name);
         profile_email = findViewById(R.id.profile_email);
-        if(user.getPhotoUrl()==null){
+        if(user!=null && user.getPhotoUrl()==null){
             profile_avatar.setImageResource(R.drawable.people);
         }
         if(user != null){
@@ -196,8 +197,10 @@ public class AppMain extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initData();
-        update_exp(user.getUid());
-        query_count(user.getUid());
+        if(user != null){
+            update_exp(user.getUid());
+            query_count(user.getUid());
+        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

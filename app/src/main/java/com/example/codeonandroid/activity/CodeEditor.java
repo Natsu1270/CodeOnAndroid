@@ -54,6 +54,14 @@ import com.example.codeonandroid.R;
 import com.example.codeonandroid.api.RequestQueueSingleton;
 import com.example.codeonandroid.fragment.EditorFragment;
 import com.example.codeonandroid.widget.ShaderEditor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +83,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnTextChangedListener {
 
@@ -106,6 +115,9 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
 
     private static final int READ_REQUEST_CODE = 42;
 
+    FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     public void hide_keyboard(View view){
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -158,6 +170,9 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
         input_text = findViewById(R.id.txt_code);
         toolbar = findViewById(R.id.toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
         map = new HashMap<>();
 
 
@@ -441,6 +456,29 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
             runCode();
         }else if(id == R.id.input_stdi){
             create_inputDialog("Custom input","Input parameter: ");
+        }else if(id == R.id.save_online){
+            if(user !=null){
+                final DocumentReference docRef = db.collection("users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if(document.exists()){
+                                final ArrayList<String> list = (ArrayList<String>) document.get("codes");
+                                list.add(input_text.getText().toString());
+                                docRef.update("codes",list);
+                                Toast.makeText(CodeEditor.this,"Code has been saved online!",Toast.LENGTH_SHORT).show();
+                            }else{
+                            }
+                        }else{
+                        }
+                    }
+                });
+            }else{
+                Toast.makeText(CodeEditor.this,"You must login to use this feature!",Toast.LENGTH_SHORT).show();
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }

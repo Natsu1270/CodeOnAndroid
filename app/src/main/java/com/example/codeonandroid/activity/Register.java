@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,19 +58,20 @@ public class Register extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    public void addUser(String id,String name,int exp,String avatar){
+    public void addUser(String id, String name, int exp, String avatar, ArrayList<String> codes){
         Map<String, Object> user = new HashMap<>();
         user.put("avatar", avatar);
         user.put("exp", exp);
         user.put("name", name);
         user.put("uid",id);
+        user.put("codes",codes);
 
 // Add a new document with a generated ID
         db.collection("users")
                 .document(id).set(user);
 
     }
-    public void check(final String docId, final String name,final int exp, final String avatar){
+    public void check(final String docId, final String name,final int exp, final String avatar,final ArrayList<String> codes){
         final DocumentReference docRef = db.collection("users").document(docId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -85,7 +87,7 @@ public class Register extends AppCompatActivity {
                             }
                         }
                     }else{
-                        addUser(docId,name,exp,avatar);
+                        addUser(docId,name,exp,avatar,codes);
                     }
                 }else{
 
@@ -168,11 +170,13 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            ArrayList<String> codes = new ArrayList<>();
+                            codes.add("print(\"Hello World\"");
                             String avatar ="empty";
                             if(user.getPhotoUrl()!=null){
                                 avatar=user.getPhotoUrl().toString();
                             }
-                            addUser(user.getUid(),user.getDisplayName(),0,avatar);
+                            addUser(user.getUid(),user.getDisplayName(),0,avatar,codes);
                             Intent main_intent = new Intent(Register.this,AppMain.class);
                             startActivity(main_intent);
                         }
@@ -208,11 +212,13 @@ public class Register extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            ArrayList<String> codes = new ArrayList<>();
+                            codes.add("print(\"Hello World\")");
                             String avatar ="empty";
                             if(user.getPhotoUrl()!=null){
                                 avatar=user.getPhotoUrl().toString();
                             }
-                            check(user.getUid(),user.getDisplayName(),0,avatar);
+                            check(user.getUid(),user.getDisplayName(),0,avatar,codes);
                             Intent main_intent = new Intent(Register.this,AppMain.class);
                             startActivity(main_intent);
                         } else {

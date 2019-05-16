@@ -86,7 +86,6 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     private ImageButton back_btn;
     private ImageButton hide_keyboard_btn;
     private LinearLayout linearLayoutTool;
-    private Spinner spinner;
 
     private static final String SELECTED_SHADER = "selected_shader";
     private static final String CODE_VISIBLE = "code_visible";
@@ -104,14 +103,16 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     public void back(View view){
         finish();
     }
+    public void do_tab(View view){
+        input_text.append("\t");
+    }
     public void clear_code(View view){
         input_text.setText("");
     }
     public void initData(){
         input_text = findViewById(R.id.txt_code);
         toolbar = findViewById(R.id.toolbar);
-        spinner = findViewById(R.id.spinner_lang);
-        Log.d("spinner", "initData: "+spinner.toString());
+
         map = new HashMap<>();
 
 

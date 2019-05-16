@@ -20,7 +20,7 @@
             android:id="@+id/back"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/backarrow"
+            android:src="@drawable/ic_arrow_back_black_24dp"
             android:background="@null"
             />
         <ImageButton
@@ -28,26 +28,28 @@
             android:id="@+id/hide_key"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/hide_key_ic"
+            android:src="@drawable/ic_keyboard_hide_black_24dp"
             android:layout_marginLeft="10dp"
             android:background="@null"
             />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/clear_code_ic"
+            android:src="@drawable/ic_format_clear_black_24dp"
             android:id="@+id/clear_code"
             android:onClick="clear_code"
             android:layout_marginLeft="10dp"
             android:background="@null"
             />
-        <Spinner
-            android:id="@+id/spinner_lang"
-
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_tab_black_24dp"
+            android:id="@+id/tab"
+            android:onClick="do_tab"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            />
 
     </LinearLayout>
 </android.support.v7.widget.Toolbar>

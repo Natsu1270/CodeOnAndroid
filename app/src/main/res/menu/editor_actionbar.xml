@@ -10,7 +10,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/run_code"
-        android:icon="@drawable/ic_action_run"
+        android:icon="@drawable/ic_play_circle_outline_black_24dp"
         android:title="Run"
         app:showAsAction="always" />
     <item

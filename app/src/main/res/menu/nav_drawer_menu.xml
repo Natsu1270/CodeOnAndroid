@@ -6,10 +6,10 @@
         android:id="@+id/leader_board"
         android:icon="@drawable/leader_board"
         android:title="LeaderBoard" />
-    <item
-        android:id="@+id/setting"
-        android:icon="@drawable/setting_ico"
-        android:title="Setting" />
+    <!--<item-->
+        <!--android:id="@+id/setting"-->
+        <!--android:icon="@drawable/setting_ico"-->
+        <!--android:title="Setting" />-->
     <item
         android:id="@+id/help"
         android:icon="@drawable/help_ico"

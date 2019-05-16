@@ -20,9 +20,9 @@
         android:id="@+id/input_stdi"
         android:title="Input" />
 
-    <item android:id="@+id/new_code" android:title="New"/>
+    <!--<item android:id="@+id/new_code" android:title="New"/>-->
     <item android:id="@+id/save_as" android:title="Save as"/>
-    <item android:id="@+id/delete_file" android:title="Delete file"/>
+    <item android:id="@+id/share_code" android:title="Share code"/>
     <item android:id="@+id/copy_code" android:title="Copy"/>
     <item android:id="@+id/paste_code" android:title="Paste" />
     <item android:id="@+id/back" android:title="Back"/>

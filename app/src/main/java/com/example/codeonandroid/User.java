@@ -1,14 +1,27 @@
 package com.example.codeonandroid;
 
+import android.net.Uri;
+
 public class User {
+    private String UID;
     private String name;
     private int exp;
-    private int avatar;
+    private String avatar;
 
-    public User(String name, int exp, int avatar) {
+
+    public User(String UID, String name, int exp, String avatar) {
+        this.UID = UID;
         this.name = name;
         this.exp = exp;
         this.avatar = avatar;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 
     public String getName() {
@@ -27,11 +40,5 @@ public class User {
         this.exp = exp;
     }
 
-    public int getAvatar() {
-        return avatar;
-    }
 
-    public void setAvatar(int avatar) {
-        this.avatar = avatar;
-    }
 }

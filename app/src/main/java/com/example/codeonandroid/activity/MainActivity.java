@@ -71,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.rate:
                     return true;
-                case R.id.setting:
-                    return true;
+
             }
         }
 

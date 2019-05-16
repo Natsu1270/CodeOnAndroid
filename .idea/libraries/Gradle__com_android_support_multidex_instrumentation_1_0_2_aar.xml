@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.support:multidex-instrumentation:1.0.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52695bc13ae0b668c21146e0c1d9d704/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52695bc13ae0b668c21146e0c1d9d704/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,11 +1,19 @@
 package com.example.codeonandroid.activity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +60,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -82,6 +93,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     String output="";
     String stdl ="";
     JSONObject json_param;
+    String filename ="filename";
 
     private Snackbar snackbar;
     private EditText input_text;
@@ -92,13 +104,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     private ImageButton hide_keyboard_btn;
     private LinearLayout linearLayoutTool;
 
-    private static final String SELECTED_SHADER = "selected_shader";
-    private static final String CODE_VISIBLE = "code_visible";
-    private static final int PREVIEW_SHADER = 1;
-    private static final int ADD_UNIFORM = 2;
-    private static final int LOAD_SAMPLE = 3;
-    private static final int FIRST_SHADER = -1;
-    private static final int NO_SHADER = 0;
+    private static final int READ_REQUEST_CODE = 42;
 
 
     public void hide_keyboard(View view){
@@ -108,18 +114,24 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     public void back(View view){
         finish();
     }
-    public void create_inputDialog(){
+    public void create_inputDialog(final String title,String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Custome input");
+        builder.setTitle(title);
+        builder.setMessage(message);
 
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                stdl = input.getText().toString();
+                if(title.equals("Custom input")){
+                    stdl = input.getText().toString();
+                }else{
+                    filename = input.getText().toString();
+                    save_file(filename,input_text.getText().toString());
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -160,7 +172,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     public void inputColor(){
         List<String> KEYWORD = new ArrayList<>(Arrays.asList("abstract", "and",
                 "arguments", "assert", "break", "case",
-                "catch", "char", "class", "const",
+                "catch", "char", "const",
                 "continue", "default", "def", "in",
                 "init", "delete", "do", "dynamic",
                 "type", "if", "else", "elif",
@@ -172,20 +184,26 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
                 "print", "private", "protected", "public",
                 "return", "sizeof", "static", "struct",
                 "switch", "this", "true", "try",
-                "void"));
+                "void","echo"));
 
         for(int i = 0; i < KEYWORD.size(); i++){
             map.put(KEYWORD.get(i), Color.CYAN);
         }
 
-        List<String> TYPE = new ArrayList<>(Arrays.asList("int", "long",
-                "float", "String", "char", "double"));
+        List<String> TYPE = new ArrayList<>(Arrays.asList("int", "long","bool","string",
+                "float", "String", "char", "double","endl"));
 
         for(int i = 0; i < TYPE.size(); i++){
-            map.put(TYPE.get(i), Color.RED);
+            map.put(TYPE.get(i), Color.GREEN);
+
+
         }
+        List<String> CLASS = new ArrayList<>(Arrays.asList("class", "using","#include","string",
+                "cout","cin","throw"));
 
-
+        for(int i = 0; i < CLASS.size(); i++) {
+            map.put(CLASS.get(i),Color.parseColor("#FFCF5AE2"));
+        }
     }
     public void show_output(String res){
         snackbar = Snackbar
@@ -206,14 +224,46 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
         sbTextView.setMaxLines(100);
         snackbar.show();
     }
+    public void save_file(String filename,String content){
+        String extension="";
+        if(language.equals("cpp")){
+            extension=".cpp";
+        }else if(language.equals("python3")){
+            extension=".py";
+        }else if(language.equals("java")){
+            extension=".java";
+        }else if(language.equals("csharp")){
+            extension=".cs";
+        }else if(language.equals("php")){
+            extension=".php";
+        }
+        String fileName = filename + extension;
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fileName);
+        try{
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(content.getBytes());
+            fos.close();
+            Toast.makeText(this,"Code's saved as file!",Toast.LENGTH_SHORT).show();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(this,"Error occured while saving file!",Toast.LENGTH_SHORT).show();
+        }catch (IOException e){
+            e.printStackTrace();
+            Toast.makeText(this,"Error occured while saving file!",Toast.LENGTH_SHORT).show();
+        }
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_editor);
         initData();
-
         inputColor();
+        text_watcher();
 
+    }
+
+    public void text_watcher(){
         input_text.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -277,7 +327,6 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     }
 
 
-
     @Override
     public void onTextChanged(String text) {
 
@@ -299,7 +348,20 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Object item = parent.getItemAtPosition(position);
                 if (item != null) {
+                    text_watcher();
                     language = item.toString();
+                    String lang = item.toString();
+                    if(lang.equals("cpp")){
+                        input_text.setText("#include <iostream>\nusing namespace std;\nint main(){\ncout <<\"Hello World!\"<< endl;\nreturn 0;\n}");
+                    }else if(lang.equals("java")){
+                        input_text.setText("public class Helloword {\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello World!\");\n\t\t}\n\t}");
+                    }else if(lang.equals("csharp")){
+                        input_text.setText("using System;\nnamespace HelloWorld {\n\tclass Hello {\n\t\tstatic void Main(){\n\t\t\tConsole.WriteLine(\"Hello World!\");\n\t\t\t}\n\t\t}\n\t}");
+                    }else if(lang.equals("php")){
+                        input_text.setText("<?php echo (\"Hello Word\") ?>");
+                    }else if(lang.equals("python3")){
+                        input_text.setText("print (\"Hello World!\")");
+                    }
                 }
             }
 
@@ -310,6 +372,23 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
         });
         return true;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 1000:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                }else{
+                    Toast.makeText(this,"Permission not granted!",Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -324,6 +403,9 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
             finish();
             moveTaskToBack(true);
         }else if(id == R.id.paste_code){
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = clipboard.getPrimaryClip();
+            input_text.append(clip.getItemAt(0).getText().toString());
 
         }else if(id == R.id.copy_code){
             String res="";
@@ -340,16 +422,25 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
 
         }else if(id == R.id.back){
             finish();
-        }else if(id == R.id.new_code){
+        } else if(id == R.id.save_as){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            ){
+                requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},1000);
+            }
+            create_inputDialog("Save file","Input file name: ");
 
-        }else if(id == R.id.save_as){
 
-        }else if(id == R.id.delete_file){
-
+        }else if(id == R.id.share_code){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, input_text.getText().toString());
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
         }else if(id == R.id.run_code){
             runCode();
         }else if(id == R.id.input_stdi){
-            create_inputDialog();
+            create_inputDialog("Custom input","Input parameter: ");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -401,5 +492,5 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
         requestQueue.add(jsonObjectRequest);
     }
 
-
+    // Open file
 }

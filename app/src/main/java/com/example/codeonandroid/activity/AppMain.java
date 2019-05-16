@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -25,15 +26,23 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.codeonandroid.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class AppMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,10 +55,15 @@ public class AppMain extends AppCompatActivity
     private ImageView profile_avatar;
     private TextView profile_name;
     private TextView profile_email;
+    private TextView exp;
+    private TextView codes_save;
+    FirebaseFirestore db;
+
 
     NavigationView navigationView;
     DrawerLayout drawer;
     Uri avatar;
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
@@ -77,13 +91,57 @@ public class AppMain extends AppCompatActivity
         Intent code_intent = new Intent(AppMain.this,CodeEditor.class);
         startActivity(code_intent);
     }
+    public void update_exp(String docId){
+        final DocumentReference docRef = db.collection("users").document(docId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        Map<String, Object> map = document.getData();
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
+                            if (entry.getKey().equals("exp")) {
+                                int update_exp=Integer.valueOf(entry.getValue().toString())+1;
+                                docRef.update("exp",update_exp);
+                                exp.setText(Integer.toString(update_exp));
+                            }
+                        }
+                    }else{
+                    }
+                }else{
+                }
+            }
+        });
+    }
+    public void query_count(final String docId){
+        final DocumentReference docRef = db.collection("users").document(docId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        ArrayList<String> list = (ArrayList<String>) document.get("codes");
+                        codes_save.setText(Integer.toString(list.size()));
+
+                    }else{
+                    }
+                }else{
+                }
+            }
+        });
+    }
     public void initData(){
+        exp = findViewById(R.id.exp);
+        codes_save = findViewById(R.id.code_save);
+
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-
 
         nav_username = headerView.findViewById(R.id.nav_user_name);
         nav_email = headerView.findViewById(R.id.nav_email);
@@ -91,8 +149,11 @@ public class AppMain extends AppCompatActivity
         profile_avatar = findViewById(R.id.profile_avatar);
         profile_name = findViewById(R.id.profile_name);
         profile_email = findViewById(R.id.profile_email);
-
+        if(user.getPhotoUrl()==null){
+            profile_avatar.setImageResource(R.drawable.people);
+        }
         if(user != null){
+            update_exp(user.getUid());
             try{
                 profile_email.setText(user.getEmail());
                 profile_name.setText(user.getDisplayName());
@@ -105,29 +166,27 @@ public class AppMain extends AppCompatActivity
                 e.printStackTrace();
             }
         }else{
-            profile_avatar.setImageResource(R.drawable.ic_noun_anonymous_302770);
+            profile_avatar.setImageResource(R.drawable.people);
             profile_name.setText("The coder");
             nav_username.setText("The coder");
             nav_email.setText("Anonymous@coa.com");
         }
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         initData();
+        update_exp(user.getUid());
+        query_count(user.getUid());
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        initData();
     }
 
     @Override
@@ -140,12 +199,12 @@ public class AppMain extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.app_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.app_main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -193,9 +252,7 @@ public class AppMain extends AppCompatActivity
 
         if (id == R.id.leader_board) {
             // Handle the camera action
-        } else if (id == R.id.setting) {
-
-        } else if (id == R.id.help) {
+        }  else if (id == R.id.help) {
 
         } else if (id == R.id.about) {
 

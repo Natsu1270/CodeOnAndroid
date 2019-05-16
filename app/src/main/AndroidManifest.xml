@@ -6,6 +6,8 @@
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +16,11 @@
         android:roundIcon="@drawable/code"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activity.ListCode"></activity>
         <activity
             android:name=".activity.AppMain"
             android:label="@string/title_activity_app_main"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity android:name=".activity.CodeEditor" />
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Register" />

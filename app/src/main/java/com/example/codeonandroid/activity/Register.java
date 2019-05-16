@@ -13,12 +13,15 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.codeonandroid.R;
+import com.example.codeonandroid.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +31,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -45,6 +54,45 @@ public class Register extends AppCompatActivity {
 
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSingInClient;
+
+    FirebaseFirestore db;
+
+    public void addUser(String id,String name,int exp,String avatar){
+        Map<String, Object> user = new HashMap<>();
+        user.put("avatar", avatar);
+        user.put("exp", exp);
+        user.put("name", name);
+        user.put("uid",id);
+
+// Add a new document with a generated ID
+        db.collection("users")
+                .document(id).set(user);
+
+    }
+    public void check(final String docId, final String name,final int exp, final String avatar){
+        final DocumentReference docRef = db.collection("users").document(docId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        Map<String, Object> map = document.getData();
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
+                            if (entry.getKey().equals("exp")) {
+                                int update_exp=Integer.valueOf(entry.getValue().toString())+1;
+                                docRef.update("exp",update_exp);
+                            }
+                        }
+                    }else{
+                        addUser(docId,name,exp,avatar);
+                    }
+                }else{
+
+                }
+            }
+        });
+    }
     private static int RC_SIGN_IN = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +128,13 @@ public class Register extends AppCompatActivity {
         back_btn = findViewById(R.id.btn_back2);
 
         mAuth = FirebaseAuth.getInstance();
-
+        db = FirebaseFirestore.getInstance();
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSingInClient = GoogleSignIn.getClient(this,gso);
+
     }
 
     public void back_click(View view){
@@ -106,7 +155,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private void createUserProfile(FirebaseUser user){
+    private void createUserProfile(final FirebaseUser user){
         name = txt_name.getText().toString();
         if(name.isEmpty()){
             name = "The Coder";
@@ -119,7 +168,13 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-
+                            String avatar ="empty";
+                            if(user.getPhotoUrl()!=null){
+                                avatar=user.getPhotoUrl().toString();
+                            }
+                            addUser(user.getUid(),user.getDisplayName(),0,avatar);
+                            Intent main_intent = new Intent(Register.this,AppMain.class);
+                            startActivity(main_intent);
                         }
                     }
                 });
@@ -133,8 +188,7 @@ public class Register extends AppCompatActivity {
             return;
         }
         createUser(rusername,rpassword);
-        Intent main_intent = new Intent(Register.this,AppMain.class);
-        startActivity(main_intent);
+
     }
 
     public void continue_gmail(View view){
@@ -154,6 +208,11 @@ public class Register extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            String avatar ="empty";
+                            if(user.getPhotoUrl()!=null){
+                                avatar=user.getPhotoUrl().toString();
+                            }
+                            check(user.getUid(),user.getDisplayName(),0,avatar);
                             Intent main_intent = new Intent(Register.this,AppMain.class);
                             startActivity(main_intent);
                         } else {

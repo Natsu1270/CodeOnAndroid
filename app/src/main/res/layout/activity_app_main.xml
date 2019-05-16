@@ -103,6 +103,9 @@
 
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/list_code_view"
+                        android:clickable="true"
+
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_width="0dp"

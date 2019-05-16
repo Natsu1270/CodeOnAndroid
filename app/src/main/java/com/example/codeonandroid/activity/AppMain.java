@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class AppMain extends AppCompatActivity
     private TextView profile_email;
     private TextView exp;
     private TextView codes_save;
+    LinearLayout list_code_view;
     FirebaseFirestore db;
 
 
@@ -91,6 +93,8 @@ public class AppMain extends AppCompatActivity
         Intent code_intent = new Intent(AppMain.this,CodeEditor.class);
         startActivity(code_intent);
     }
+
+
     public void update_exp(String docId){
         final DocumentReference docRef = db.collection("users").document(docId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -122,8 +126,19 @@ public class AppMain extends AppCompatActivity
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
-                        ArrayList<String> list = (ArrayList<String>) document.get("codes");
+                        final ArrayList<String> list = (ArrayList<String>) document.get("codes");
                         codes_save.setText(Integer.toString(list.size()));
+                        list_code_view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if(Integer.valueOf(codes_save.getText().toString())<1){
+                                    Toast.makeText(AppMain.this,"You have not saved any code yet!",Toast.LENGTH_SHORT).show();
+                                }
+                                Intent intent = new Intent(AppMain.this,ListCode.class);
+                                intent.putExtra("list",list);
+                                startActivity(intent);
+                            }
+                        });
 
                     }else{
                     }
@@ -133,6 +148,8 @@ public class AppMain extends AppCompatActivity
         });
     }
     public void initData(){
+
+        list_code_view = findViewById(R.id.list_code_view);
         exp = findViewById(R.id.exp);
         codes_save = findViewById(R.id.code_save);
 

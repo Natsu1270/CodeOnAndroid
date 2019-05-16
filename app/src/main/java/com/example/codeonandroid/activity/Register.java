@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -117,8 +119,7 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Intent main_intent = new Intent(Register.this,AppMain.class);
-                            startActivity(main_intent);
+
                         }
                     }
                 });
@@ -132,6 +133,8 @@ public class Register extends AppCompatActivity {
             return;
         }
         createUser(rusername,rpassword);
+        Intent main_intent = new Intent(Register.this,AppMain.class);
+        startActivity(main_intent);
     }
 
     public void continue_gmail(View view){

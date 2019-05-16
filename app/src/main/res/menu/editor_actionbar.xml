@@ -16,6 +16,9 @@
     <item
         android:id="@+id/read_only"
         android:title="Read only mode" />
+    <item
+        android:id="@+id/input_stdi"
+        android:title="Input" />
 
     <item android:id="@+id/new_code" android:title="New"/>
     <item android:id="@+id/save_as" android:title="Save as"/>

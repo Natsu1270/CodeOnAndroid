@@ -43,9 +43,12 @@ public class AppMain extends AppCompatActivity
     private TextView nav_username;
     private TextView nav_email;
     private ImageView iavatar;
+    private ImageView profile_avatar;
+    private TextView profile_name;
+    private TextView profile_email;
+
     NavigationView navigationView;
     DrawerLayout drawer;
-
     Uri avatar;
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -85,16 +88,25 @@ public class AppMain extends AppCompatActivity
         nav_username = headerView.findViewById(R.id.nav_user_name);
         nav_email = headerView.findViewById(R.id.nav_email);
         iavatar = headerView.findViewById(R.id.avatar);
+        profile_avatar = findViewById(R.id.profile_avatar);
+        profile_name = findViewById(R.id.profile_name);
+        profile_email = findViewById(R.id.profile_email);
+
         if(user != null){
             try{
+                profile_email.setText(user.getEmail());
+                profile_name.setText(user.getDisplayName());
                 nav_username.setText(user.getDisplayName());
                 nav_email.setText(user.getEmail());
                 avatar = user.getPhotoUrl();
                 new DownloadImageTask(iavatar).execute(avatar.toString());
+                new DownloadImageTask(profile_avatar).execute(avatar.toString());
             }catch (Exception e){
                 e.printStackTrace();
             }
         }else{
+            profile_avatar.setImageResource(R.drawable.ic_noun_anonymous_302770);
+            profile_name.setText("The coder");
             nav_username.setText("The coder");
             nav_email.setText("Anonymous@coa.com");
         }
@@ -107,14 +119,7 @@ public class AppMain extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         initData();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -176,7 +181,7 @@ public class AppMain extends AppCompatActivity
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
         Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        positiveButton.setTextColor(Color.parseColor("#FF0B8B42"));
+        positiveButton.setTextColor(Color.RED);
         Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         negativeButton.setTextColor(Color.parseColor("#FF0B8B42"));
     }

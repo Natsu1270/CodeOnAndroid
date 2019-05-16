@@ -9,7 +9,7 @@
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
     <EditText
-        android:background="#28285A"
+        android:background="#2A2B25"
         android:layout_below="@id/toolbar"
         android:textCursorDrawable="@drawable/color_cursor"
         android:textColor="#ffff"

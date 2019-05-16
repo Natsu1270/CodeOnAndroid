@@ -3,12 +3,15 @@ package com.example.codeonandroid.activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -76,6 +80,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     String language = "";
     String versionIndex = "0";
     String output="";
+    String stdl ="";
     JSONObject json_param;
 
     private Snackbar snackbar;
@@ -102,6 +107,34 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     }
     public void back(View view){
         finish();
+    }
+    public void create_inputDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Custome input");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                stdl = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setTextColor(Color.parseColor("#FF0B8B42"));
+        Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setTextColor(Color.parseColor("#FF0B8B42"));
     }
     public void do_tab(View view){
         input_text.append("\t");
@@ -315,6 +348,8 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
 
         }else if(id == R.id.run_code){
             runCode();
+        }else if(id == R.id.input_stdi){
+            create_inputDialog();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -331,6 +366,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
             json_param.put("clientId",clientId);
             json_param.put("clientSecret",clientSecret);
             json_param.put("script",script);
+            json_param.put("stdin",stdl);
             json_param.put("language",language);
             json_param.put("versionIndex",versionIndex);
 

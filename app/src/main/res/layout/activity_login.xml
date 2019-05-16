@@ -17,7 +17,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#6F000205"
+        android:background="#C3673AB7"
         />
     <ImageButton
         android:onClick="back_click"

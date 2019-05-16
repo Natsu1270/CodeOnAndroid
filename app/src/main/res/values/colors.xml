@@ -20,4 +20,5 @@
     <color name="crop_bound">#8fff</color>
     <color name="cube_face_selected">#ffff</color>
     <color name="cube_face_text">#fff</color>
+    <color name="startblue">#09c6df</color>
 </resources>

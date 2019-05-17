@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,32 +29,32 @@ import java.util.ArrayList;
 
 public class ListCode extends AppCompatActivity {
     private ListView listView;
+    private Toolbar toolbar;
+    private ImageButton button;
     FirebaseFirestore db;
     ArrayList<String> list_codes;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
 
-    public void query_count(final String docId){
-        final DocumentReference docRef = db.collection("users").document(docId);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        ArrayList<String> list_code = (ArrayList<String>) document.get("codes");
-                    }else{
-                    }
-                }else{
-                }
-            }
-        });
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_code);
+
+        toolbar = findViewById(R.id.lcode_toolbar);
+        button = findViewById(R.id.list_code_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -60,10 +62,13 @@ public class ListCode extends AppCompatActivity {
 //        query_count(user.getUid());
         listView = findViewById(R.id.list_code);
         list_codes = new ArrayList<String>();
+
         final Intent intent = getIntent();
         list_codes = intent.getExtras().getStringArrayList("list");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list_codes);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

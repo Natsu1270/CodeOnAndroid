@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ListCode">
-
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lcode_toolbar"
+        android:background="#673AB7"
+        >
+        <ImageButton
+            android:id="@+id/list_code_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:background="@android:color/transparent"
+            />
+    </android.support.v7.widget.Toolbar>
     <ListView
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/lcode_toolbar"
         android:id="@+id/list_code"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

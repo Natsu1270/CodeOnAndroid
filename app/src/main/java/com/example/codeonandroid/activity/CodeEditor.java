@@ -34,13 +34,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.widget.Toolbar;
 import android.support.v7.widget.Toolbar;
 
 import com.android.volley.Request;
@@ -48,12 +45,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.codeonandroid.R;
 import com.example.codeonandroid.api.RequestQueueSingleton;
-import com.example.codeonandroid.fragment.EditorFragment;
-import com.example.codeonandroid.widget.ShaderEditor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,31 +55,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnTextChangedListener {
+public class CodeEditor extends AppCompatActivity  {
 
     private Toolbar toolbar;
     private RelativeLayout layout;
@@ -107,11 +91,6 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     private Snackbar snackbar;
     private EditText input_text;
     private TextView output_text;
-    private EditorFragment editorFragment;
-    private Spinner qualitySpinner;
-    private ImageButton back_btn;
-    private ImageButton hide_keyboard_btn;
-    private LinearLayout linearLayoutTool;
 
     private static final int READ_REQUEST_CODE = 42;
 
@@ -342,10 +321,7 @@ public class CodeEditor extends AppCompatActivity implements ShaderEditor.OnText
     }
 
 
-    @Override
-    public void onTextChanged(String text) {
 
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

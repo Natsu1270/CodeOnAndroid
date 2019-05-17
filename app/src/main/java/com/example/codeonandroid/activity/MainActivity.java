@@ -79,10 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initData(){
-//        logout_btn = findViewById(R.id.logout_btn);
-//        code_btn = findViewById(R.id.code);
-//        username = findViewById(R.id.username);
-//        avatar = findViewById(R.id.avatar);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();

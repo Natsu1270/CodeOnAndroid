@@ -271,7 +271,9 @@ public class AppMain extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.leader_board) {
-            // Handle the camera action
+            Intent intent = new Intent(this,LeaderBoard.class);
+            startActivity(intent);
+
         }  else if (id == R.id.help) {
 
         } else if (id == R.id.about) {

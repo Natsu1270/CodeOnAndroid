@@ -171,7 +171,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             ArrayList<String> codes = new ArrayList<>();
-                            codes.add("print(\"Hello World\"");
+//                            codes.add("print(\"Hello World\"");
                             String avatar ="empty";
                             if(user.getPhotoUrl()!=null){
                                 avatar=user.getPhotoUrl().toString();
@@ -213,7 +213,7 @@ public class Register extends AppCompatActivity {
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             ArrayList<String> codes = new ArrayList<>();
-                            codes.add("print(\"Hello World\")");
+                            //codes.add("print(\"Hello World\")");
                             String avatar ="empty";
                             if(user.getPhotoUrl()!=null){
                                 avatar=user.getPhotoUrl().toString();

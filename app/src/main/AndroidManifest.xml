@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/code"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.ListCode"></activity>
+        <activity android:name=".activity.LeaderBoard"></activity>
+        <activity android:name=".activity.ListCode" />
         <activity
             android:name=".activity.AppMain"
             android:label="@string/title_activity_app_main"

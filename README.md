@@ -1,8 +1,6 @@
 # Code On Android
-![](![](https://i.imgur.com/c5gw7ta.jpg?1))
-Create and edit [GLSL](https://en.wikipedia.org/wiki/GLSL) shaders on
-your Android phone or tablet and use them as live wallpaper.
-
+![](https://i.imgur.com/c5gw7ta.jpg?1)
+Simple, powerful and ease at use code editor and compiler on Android device.
 
 ## Features
 

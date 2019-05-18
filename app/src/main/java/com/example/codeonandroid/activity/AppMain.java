@@ -207,7 +207,9 @@ public class AppMain extends AppCompatActivity
     @Override
     protected void onRestart() {
         super.onRestart();
-        query_count(user.getUid());
+        if(user !=null){
+            query_count(user.getUid());
+        }
     }
 
     @Override
@@ -220,12 +222,7 @@ public class AppMain extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.app_main, menu);
-//        return true;
-//    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

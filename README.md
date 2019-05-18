@@ -1,9 +1,8 @@
 # Code On Android
-
+![](![](https://i.imgur.com/c5gw7ta.jpg?1))
 Create and edit [GLSL](https://en.wikipedia.org/wiki/GLSL) shaders on
 your Android phone or tablet and use them as live wallpaper.
 
-<a href="https://play.google.com/store/apps/details?id=de.markusfisch.android.shadereditor"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80"/></a>
 
 ## Features
 

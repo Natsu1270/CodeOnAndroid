@@ -12,7 +12,9 @@ Simple, powerful and ease at use code editor and compiler on Android device.
 * Climb rank
 
 See [FAQ.md](FAQ.md) for frequently asked questions.
-
+## How to use
+* If you want to save code online for lately usage,all you need to do is creating an account or sign in with your account, or just skip and you can use the app local.
+* ![](https://i.imgur.com/W5qy9gz.png?1)
 ### Images
 ![](https://i.imgur.com/c5gw7ta.jpg?1)
 ![](https://i.imgur.com/b1WEaIm.png)

@@ -20,10 +20,9 @@ See [FAQ.md](FAQ.md) for frequently asked questions.
 ![](https://i.imgur.com/c5gw7ta.jpg?1)
 ![](https://i.imgur.com/b1WEaIm.png)
 ![](https://i.imgur.com/jyYxTfu.png)
-![](https://lh4.googleusercontent.com/-LT3k4z9JHo8/VCUo_0jnZRI/AAAAAAAAAHg/Npk9UlkXIV8/w347-h520-no/PhoneCustom_4.png)
-![](https://lh5.googleusercontent.com/-hXvsf-WYvBs/VCUo9sYfR-I/AAAAAAAAAHY/TTfAgiV_7ko/w347-h520-no/PhoneCustom_3.png)
-![](https://lh6.googleusercontent.com/-Qib82pK6mZU/VCUpAgYmUdI/AAAAAAAAAHo/zoPVmwcatbQ/w347-h520-no/PhoneCustom_5.png)
-![](https://lh5.googleusercontent.com/-SERL7X-JHuc/VCax0QSlCGI/AAAAAAAAAJA/hu8dvbvJGBM/w375-h563-no/PhoneCustom_2.png)
+![](https://i.imgur.com/1SCmh6P.png)
+![](https://i.imgur.com/IsUw0jo.png)
+
 
 ## License
 

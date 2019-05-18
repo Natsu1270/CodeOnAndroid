@@ -18,8 +18,13 @@ See [FAQ.md](FAQ.md) for frequently asked questions.
 
 ### Images
 ![](https://i.imgur.com/c5gw7ta.jpg?1)
-![](https://lh3.googleusercontent.com/-OvazluFl_QQ/VCUo9DAje9I/AAAAAAAAAHQ/i7n1uCpU1hE/w347-h520-no/PhoneCustom_1.png)
-![](https://lh4.googleusercontent.com/-zh4CYdQPecg/VCUpD3QXpAI/AAAAAAAAAHw/ulL5-V0iJUw/w347-h520-no/PhoneCustom_6.png)![](https://lh4.googleusercontent.com/-LT3k4z9JHo8/VCUo_0jnZRI/AAAAAAAAAHg/Npk9UlkXIV8/w347-h520-no/PhoneCustom_4.png)![](https://lh5.googleusercontent.com/-hXvsf-WYvBs/VCUo9sYfR-I/AAAAAAAAAHY/TTfAgiV_7ko/w347-h520-no/PhoneCustom_3.png)![](https://lh6.googleusercontent.com/-Qib82pK6mZU/VCUpAgYmUdI/AAAAAAAAAHo/zoPVmwcatbQ/w347-h520-no/PhoneCustom_5.png)![](https://lh5.googleusercontent.com/-SERL7X-JHuc/VCax0QSlCGI/AAAAAAAAAJA/hu8dvbvJGBM/w375-h563-no/PhoneCustom_2.png)
+![](https://i.imgur.com/b1WEaIm.png)
+![](https://i.imgur.com/jyYxTfu.png)
+![](https://lh4.googleusercontent.com/-LT3k4z9JHo8/VCUo_0jnZRI/AAAAAAAAAHg/Npk9UlkXIV8/w347-h520-no/PhoneCustom_4.png)
+![](https://lh5.googleusercontent.com/-hXvsf-WYvBs/VCUo9sYfR-I/AAAAAAAAAHY/TTfAgiV_7ko/w347-h520-no/PhoneCustom_3.png)
+![](https://lh6.googleusercontent.com/-Qib82pK6mZU/VCUpAgYmUdI/AAAAAAAAAHo/zoPVmwcatbQ/w347-h520-no/PhoneCustom_5.png)
+![](https://lh5.googleusercontent.com/-SERL7X-JHuc/VCax0QSlCGI/AAAAAAAAAJA/hu8dvbvJGBM/w375-h563-no/PhoneCustom_2.png)
+
 ## License
 
 Copyright &copy; 2019 CodeOnAndroid BKU Ho Chi Minh City. All Rights Reserved.

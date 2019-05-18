@@ -1,5 +1,5 @@
 # Code On Android
-![](https://i.imgur.com/c5gw7ta.jpg?1)
+![](https://i.imgur.com/Euj8yNY.png)__
 Simple, powerful and ease at use code editor and compiler on Android device.
 
 ## Features
